@@ -12,7 +12,6 @@ import {
   Grid,
 } from '@material-ui/core';
 import NavBar from '../components/NavBar';
-import { useHistory } from "react-router-dom";
 import WPILogo from '../Images/WPILogo.png';
 import VentureForumLogo from '../Images/VentureForumLogo.png';
 import WorcesterChamberOfCommerceLogo from '../Images/WorcesterChamberOfCommerceLogo.png';
@@ -20,6 +19,7 @@ import StartUpWorcesterLogo from '../Images/StartUpWorcesterLogo.PNG';
 import BBBLogo from '../Images/BBBLogo.png';
 import PersonQuestionMark from '../Images/PersonQuestionMark.jpg';
 import Copyright from '../components/Copyright';
+import NavBarNotLoggedIn from '../components/NavBarNotLoggedIn';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -51,15 +51,10 @@ const useStyles = makeStyles((theme) => ({
 export default function MyStartup() {
   const classes = useStyles();
   const user = useContext(UserContext);
-  const history = useHistory();
-
-  if (!user.isLoggedIn) {
-    history.push('/');
-  }
 
   return (
       <div className={classes.container}>
-        <NavBar />
+        {user.isLoggedIn ? <NavBar /> : <NavBarNotLoggedIn />}
         <Grid
           container
           alignItems="center"

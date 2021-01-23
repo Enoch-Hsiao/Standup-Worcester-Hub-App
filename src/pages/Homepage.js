@@ -7,11 +7,12 @@ import {
   Typography,
   Button,
 } from '@material-ui/core';
-import FactoryLogo from '../Images/FactoryLogo.png';
 import GoogleLogo from '../Images/GoogleLogo.png';
 import WorcesterBackground from '../Images/WorcesterBackground.jpg';
 import { Link } from 'react-router-dom';
 import Copyright from '../components/Copyright';
+import BookIcon from '../Images/BookIcon.png';
+import FactoryIcon from '../Images/FactoryIcon.png';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -29,6 +30,9 @@ const useStyles = makeStyles((theme) => ({
     paddingLeft: '10px',
     textTransform: 'unset',
     marginTop: '10px',
+    paddingBottom: "0px",
+    paddingTop: "0px",
+    height: "50px",
     '@media (max-width:370px)': {
       paddingLeft: '5px',
       paddingRight: '5px',
@@ -38,6 +42,11 @@ const useStyles = makeStyles((theme) => ({
     '@media (max-width:630px)': {
       fontSize: "30px",
     },
+  },
+  icon: {
+    height: '48px',
+    margin: theme.spacing(1),
+    marginLeft: '-5px',
   },
   copyright: {
       color: 'white',
@@ -82,11 +91,12 @@ export default function Login() {
           color="primary"
           onClick={signInWithGoogle}
         >
-          <img src={GoogleLogo} alt="google icon"/>
-          <Typography variant="h5" display="block" noWrap>
+          <img src={GoogleLogo} alt="google icon" className={classes.icon}/>
+          <Typography className={classes.text} variant="h5" display="block" noWrap>
             Sign in with Google
           </Typography>
         </Button>
+
         <Button 
           className={classes.button}
           component={Link}
@@ -94,9 +104,22 @@ export default function Login() {
           variant="outlined"
           color="primary"
         >
-          <img src={FactoryLogo} alt="factory icon"/>
-          <Typography variant="h6" display="block" noWrap>
+          <img src={FactoryIcon} alt="factory icon" className={classes.icon}/>
+          <Typography className={classes.text} variant="h5" display="block" noWrap>
             View Worcester Startups
+          </Typography>
+        </Button>
+
+        <Button 
+          className={classes.button}
+          component={Link}
+          to='/Resources'
+          variant="outlined"
+          color="primary"
+        >
+          <img src={BookIcon} alt="factory icon" className={classes.icon}/>
+          <Typography className={classes.text} variant="h5" display="block" noWrap>
+            Resources
           </Typography>
         </Button>
 

@@ -5,10 +5,10 @@ import { AppBar, Toolbar, Typography, Button } from '@material-ui/core/';
 import { Link as RouterLink } from 'react-router-dom';
 import { logOut } from "../services/firebase";
 import WorcesterLogo from '../Images/WorcesterLogo.png';
-import ResourceLogo from '../Images/ResourceLogo.png';
-import ComputerLogo from '../Images/ComputerLogo.png';
+import ResourceIcon from '../Images/ResourceIcon.png';
+import ComputerIcon from '../Images/ComputerIcon.png';
 import { useHistory } from "react-router-dom";
-import StartupsLogo from '../Images/StartupsLogo.png';
+import StartupsIcon from '../Images/StartupsIcon.png';
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -16,13 +16,13 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(0),
     padding: theme.spacing(0),
     flexGrow: 1,
-    '@media (max-width:650px)': {
+    '@media (max-width:770px)': {
       flexGrow: 0,
     },
   },
   growLogout: {
     flexGrow: 1,
-    '@media (max-width:650px)': {
+    '@media (max-width:770px)': {
       flexGrow: 0,
     },
   },
@@ -117,7 +117,7 @@ export default function NavBar() {
               to={'/My-Startup'}
           >
               <img
-                src={ComputerLogo}
+                src={ComputerIcon}
                 alt="Computer Logo"
                 className={classes.logos}
               />
@@ -137,7 +137,7 @@ export default function NavBar() {
               to={'/Startups'}
           >
               <img
-                src={StartupsLogo}
+                src={StartupsIcon}
                 alt="Startups Logo"
                 className={classes.logos}
               />
@@ -158,7 +158,7 @@ export default function NavBar() {
               to={'/Resources'}
           >
               <img
-                src={ResourceLogo}
+                src={ResourceIcon}
                 alt="Resource Logo"
                 className={classes.logos}
               />

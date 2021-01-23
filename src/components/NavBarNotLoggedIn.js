@@ -4,6 +4,9 @@ import { AppBar, Toolbar, Typography, Button } from '@material-ui/core/';
 import { signInWithGoogle } from '../services/firebase';
 import WorcesterLogo from '../Images/WorcesterLogo.png';
 import GoogleLogo from '../Images/GoogleLogo.png';
+import { Link as RouterLink } from 'react-router-dom';
+import ResourceIcon from '../Images/ResourceIcon.png';
+import StartupsIcon from '../Images/StartupsIcon.png';
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -11,31 +14,80 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(0),
     padding: theme.spacing(0),
     flexGrow: 1,
+    '@media (max-width:770px)': {
+      flexGrow: 0,
+    },
   },
   growLogout: {
     flexGrow: 1,
+    '@media (max-width:770px)': {
+      flexGrow: 0,
+    },
   },
   logo: {
     height: '60px',
     margin: theme.spacing(1),
     marginRight: '15px',
+    '@media (max-width:770px)': {
+      display:'none'
+    },
   },
   button: {
     backgroundColor: theme.palette.primary.main,
     marginRight: theme.spacing(3),
-    padding: theme.spacing(1.5),
+    padding: theme.spacing(1),
     paddingBottom: 0,
     paddingTop: 0,
-    minWidth: '20px',
+    minWidth: '175px',
     textTransform: 'unset',
     borderStyle: 'solid',
     borderColor: 'white',
     borderWidth: '2px',
-    height: '54px',
+    height: '48px',
+    '@media (max-width:905px)': {
+      marginRight: theme.spacing(1),
+      padding: theme.spacing(1),
+      minWidth: '125px',
+      flex: '25%',
+    },
+    '@media (max-width:540px)': {
+      marginRight: theme.spacing(0.5),
+      padding: theme.spacing(0.5),
+      height: '50px',
+      minWidth: '85px',
+      flex: '25%',
+    },
   },
   buttonText: {
     color: 'white',
-},
+    fontSize: '20px',
+    '@media (max-width:948px)': {
+      fontSize: '13px',
+    },
+    '@media (max-width:540px)': {
+      fontSize: '12px',
+    },
+  },
+  logos: {
+    height: '38px',
+    margin: theme.spacing(1),
+    marginLeft: '-5px',
+    '@media (max-width:677px)': {
+      display:'none'
+    },
+  },
+  googleIcon: {
+    height: '40px',
+    margin: theme.spacing(1),
+    marginLeft: '-5px',
+    borderStyle: 'solid',
+    borderColor: 'white',
+    borderRadius: '50%',
+    borderWidth: '0px',
+    '@media (max-width:677px)': {
+      display:'none'
+    },
+  },
 }));
 
 export default function NavBar() {
@@ -50,13 +102,47 @@ export default function NavBar() {
             alt="Logo"
             className={classes.logo}
           />
-          <Typography
-              className={classes.buttonText}
-              variant="h5"
-              noWrap={true}
+          <Button
+              className={classes.button}
+              variant="outlined"
+              color="primary"
+              component={RouterLink}
+              to={'/Startups'}
           >
-              StartUp Worcester Hub
-          </Typography>
+              <img
+                src={StartupsIcon}
+                alt="Startups Logo"
+                className={classes.logos}
+              />
+              <Typography
+                  className={classes.buttonText}
+                  variant="h5"
+                  noWrap={true}
+
+              >
+                  View Startups
+              </Typography>
+          </Button>
+          <Button
+              className={classes.button}
+              variant="outlined"
+              color="primary"
+              component={RouterLink}
+              to={'/Resources'}
+          >
+              <img
+                src={ResourceIcon}
+                alt="Resource Logo"
+                className={classes.logos}
+              />
+              <Typography
+                  className={classes.buttonText}
+                  variant="h5"
+                  noWrap={true}
+              >
+                  Resources
+              </Typography>
+          </Button>
           <div className={classes.growLogout} />
           <Button
               className={classes.button}
@@ -65,7 +151,7 @@ export default function NavBar() {
               m={-2}
               onClick={signInWithGoogle}
           >
-            <img src={GoogleLogo} alt="google icon"/>
+            <img src={GoogleLogo} alt="google icon" className={classes.googleIcon}/>
             <Typography
                 className={classes.buttonText}
                 variant="h6"
