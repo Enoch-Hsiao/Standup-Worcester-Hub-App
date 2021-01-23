@@ -15,10 +15,7 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
     margin: theme.spacing(0),
     padding: theme.spacing(0),
-    flexGrow: 1,
-    '@media (max-width:770px)': {
-      flexGrow: 0,
-    },
+    flexGrow: 0,
   },
   growLogout: {
     flexGrow: 1,
@@ -37,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
   button: {
     backgroundColor: theme.palette.primary.main,
     marginRight: theme.spacing(3),
-    padding: theme.spacing(1),
+    padding: theme.spacing(2),
     paddingBottom: 0,
     paddingTop: 0,
     minWidth: '175px',
@@ -46,7 +43,7 @@ const useStyles = makeStyles((theme) => ({
     borderColor: 'white',
     borderWidth: '2px',
     height: '48px',
-    '@media (max-width:905px)': {
+    '@media (max-width:975px)': {
       marginRight: theme.spacing(1),
       padding: theme.spacing(1),
       minWidth: '125px',
@@ -63,14 +60,14 @@ const useStyles = makeStyles((theme) => ({
   buttonText: {
     color: 'white',
     fontSize: '20px',
-    '@media (max-width:948px)': {
+    '@media (max-width:975px)': {
       fontSize: '13px',
     },
     '@media (max-width:540px)': {
       fontSize: '12px',
     },
   },
-  logos: {
+  icons: {
     height: '38px',
     margin: theme.spacing(1),
     marginLeft: '-5px',
@@ -119,12 +116,12 @@ export default function NavBar() {
               <img
                 src={ComputerIcon}
                 alt="Computer Logo"
-                className={classes.logos}
+                className={classes.icons}
               />
               <Typography
                   className={classes.buttonText}
                   variant="h5"
-                  noWrap={true}
+                  noWrap
               >
                   My Startup
               </Typography>
@@ -139,13 +136,12 @@ export default function NavBar() {
               <img
                 src={StartupsIcon}
                 alt="Startups Logo"
-                className={classes.logos}
+                className={classes.icons}
               />
               <Typography
                   className={classes.buttonText}
                   variant="h5"
-                  noWrap={true}
-
+                  noWrap
               >
                   View Startups
               </Typography>
@@ -160,12 +156,12 @@ export default function NavBar() {
               <img
                 src={ResourceIcon}
                 alt="Resource Logo"
-                className={classes.logos}
+                className={classes.icons}
               />
               <Typography
                   className={classes.buttonText}
                   variant="h5"
-                  noWrap={true}
+                  noWrap
               >
                   Resources
               </Typography>
@@ -186,7 +182,7 @@ export default function NavBar() {
               <Typography
                   className={classes.buttonText}
                   variant="h5"
-                  noWrap={true}
+                  noWrap
               >
                   Logout
               </Typography>

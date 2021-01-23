@@ -68,7 +68,7 @@ const useStyles = makeStyles((theme) => ({
       fontSize: '12px',
     },
   },
-  logos: {
+  icons: {
     height: '38px',
     margin: theme.spacing(1),
     marginLeft: '-5px',
@@ -112,13 +112,12 @@ export default function NavBar() {
               <img
                 src={StartupsIcon}
                 alt="Startups Logo"
-                className={classes.logos}
+                className={classes.icons}
               />
               <Typography
                   className={classes.buttonText}
                   variant="h5"
-                  noWrap={true}
-
+                  noWrap
               >
                   View Startups
               </Typography>
@@ -133,12 +132,12 @@ export default function NavBar() {
               <img
                 src={ResourceIcon}
                 alt="Resource Logo"
-                className={classes.logos}
+                className={classes.icons}
               />
               <Typography
                   className={classes.buttonText}
                   variant="h5"
-                  noWrap={true}
+                  noWrap
               >
                   Resources
               </Typography>
@@ -155,7 +154,7 @@ export default function NavBar() {
             <Typography
                 className={classes.buttonText}
                 variant="h6"
-                noWrap={true}
+                noWrap
             >
                 Sign in with Google
             </Typography>
