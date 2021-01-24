@@ -1,4 +1,4 @@
-# Standup Worcester Hub - Hack@WPI 2021 Submission
+# Standup Worcester Hub - Hack@WPI 2021 Community Hack Winner - 1st Prize
 
 Through the web application StartUp Worcester Hub, you can display your startup to the Worcester community, support local startups, and explore entrepreneurship resources available in the city.
 
