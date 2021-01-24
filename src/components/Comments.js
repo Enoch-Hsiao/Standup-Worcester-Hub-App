@@ -30,7 +30,6 @@ const useStyles = makeStyles((theme) => ({
     marginTop: '100px',
     height: '100%',
     width: '100%',
-    minHeight: '100vh',
     display: 'flex',
     alignItems: 'center',
     flexDirection: 'column',
