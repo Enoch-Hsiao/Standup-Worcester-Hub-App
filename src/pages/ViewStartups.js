@@ -664,6 +664,7 @@ export default function MyStartup() {
               variant="outlined"
               fullWidth={true}
               multiline
+              disabled={!user.isLoggedIn}
             />
             <div style={{marginBottom:'20px'}}>
               <Button
@@ -674,6 +675,7 @@ export default function MyStartup() {
                   textTransform: 'unset',
                   width: '200px',
                 }}
+                disabled={!user.isLoggedIn}
               >
                 <img
                   src={UpRightArrow}
