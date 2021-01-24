@@ -272,7 +272,7 @@ export default function ViewStartUpInfo({open, setOpen}) {
         setValues(response.val())
       }
     }
-    get(setStartUpData, 'startups/' + user.startupID , null, onSuccess, true);
+    get(setStartUpData, 'startups/' + user.startupID , null, onSuccess);
   }
 
   useEffect(getData, []);
