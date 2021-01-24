@@ -204,6 +204,19 @@ export default function StartupForm({open, setOpen}) {
   const [errorBannerMessage, setErrorBannerMessage] = useState("");
 
   const saveValues = () => {
+    if(values.public) {
+      //At least 1 required field is not filled in
+        if ((!values.companyName || !values.companyName.trim()) || 
+            (!values.companyIndustry || !values.companyIndustry.trim()) ||
+            (!values.companyDescription || !values.companyDescription.trim())) {
+          setErrorPublic(true);
+          return;
+      } else {
+          setErrorPublic(false);
+      }
+    } 
+
+  
     let newValues = values;
     newValues.companyStartUpWorcester = startUpWorcester;
     newValues.companyAdditionalInformation = additionalInformation;
