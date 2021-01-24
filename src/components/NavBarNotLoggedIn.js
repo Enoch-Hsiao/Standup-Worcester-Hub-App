@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
     margin: theme.spacing(0),
     padding: theme.spacing(0),
-    flexGrow: 1,
+    flexGrow: 0,
     '@media (max-width:770px)': {
       flexGrow: 0,
     },
@@ -58,14 +58,29 @@ const useStyles = makeStyles((theme) => ({
       flex: '25%',
     },
   },
+  navBar: {
+    '@media (max-width:540px)': {
+      paddingLeft: '2px',
+      paddingRight: '2px',
+    }, 
+  },
   buttonText: {
     color: 'white',
     fontSize: '20px',
     '@media (max-width:948px)': {
       fontSize: '13px',
     },
+    '@media (max-width:677px)': {
+      fontSize: '17px',
+    },
     '@media (max-width:540px)': {
-      fontSize: '12px',
+      fontSize: '15px',
+    },
+    '@media (max-width:460px)': {
+      fontSize: '13px',
+    },
+    '@media (max-width:390px)': {
+      fontSize: '11px',
     },
   },
   icons: {
@@ -90,13 +105,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function NavBar() {
+export default function NavBarNotLoggedIn() {
     const classes = useStyles();
 
     return (
       <div className={classes.grow}>
       <AppBar position="static">
-        <Toolbar>
+        <Toolbar className={classes.navBar}>
          <img
             src={WorcesterLogo}
             alt="Logo"
@@ -107,7 +122,7 @@ export default function NavBar() {
               variant="outlined"
               color="primary"
               component={RouterLink}
-              to={'/Startups'}
+              to={'/startups'}
           >
               <img
                 src={StartupsIcon}
@@ -127,7 +142,7 @@ export default function NavBar() {
               variant="outlined"
               color="primary"
               component={RouterLink}
-              to={'/Resources'}
+              to={'/resources'}
           >
               <img
                 src={ResourceIcon}

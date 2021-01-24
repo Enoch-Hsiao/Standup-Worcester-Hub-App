@@ -15,13 +15,13 @@ export default function App() {
           <Route exact path="/">
             <Login />
           </Route>
-          <Route path="/My-Startup">
+          <Route path="/my-startup">
             <MyStartup/>
           </Route>
-          <Route path="/Startups">
+          <Route path="/startups">
             <ViewStartups/>
           </Route>
-          <Route path="/Resources">
+          <Route path="/resources">
             <Resources/>
           </Route>
           <Route>

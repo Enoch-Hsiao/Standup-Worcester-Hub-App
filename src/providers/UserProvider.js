@@ -67,6 +67,7 @@ export default function UserProvider(props) {
               companyYoutube: "",
               companyLinkedIn: "",
               companyWebsite:"",
+              companyLocation:"",
               companyService: "",
               companyBusinessModel: "",
               companySalesAndMarketing: "",

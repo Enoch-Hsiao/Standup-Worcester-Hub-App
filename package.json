@@ -12,6 +12,7 @@
     "dotenv": "^8.2.0",
     "firebase": "^8.2.3",
     "html-to-text": "^6.0.0",
+    "material-ui-search-bar": "^1.0.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.2.0",

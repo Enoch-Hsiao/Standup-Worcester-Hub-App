@@ -18,6 +18,7 @@ import WorcesterChamberOfCommerceLogo from '../Images/WorcesterChamberOfCommerce
 import StartUpWorcesterLogo from '../Images/StartUpWorcesterLogo.PNG';
 import BBBLogo from '../Images/BBBLogo.png';
 import PersonQuestionMark from '../Images/PersonQuestionMark.jpg';
+import BookIcon from '../Images/BookIcon.png';
 import Copyright from '../components/Copyright';
 import NavBarNotLoggedIn from '../components/NavBarNotLoggedIn';
 
@@ -38,6 +39,12 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     alignItems: 'center',
     flexDirection: 'column',
+  },
+  icons: {
+    height: '54px',
+    position: 'relative',
+    right: '2px',
+    bottom: '-15px',
   },
   googleText: {
     paddingLeft: '5px',
@@ -70,6 +77,11 @@ export default function MyStartup() {
           <CardActionArea>
             <CardContent>
               <Typography gutterBottom variant="h5" component="h2">
+                <img
+                  src={BookIcon}
+                  alt="Factory Icon"
+                  className={classes.icons}
+                />
                 {"WPI Innovation & Entrepreneurship"}
               </Typography>
               <CardMedia
@@ -99,6 +111,11 @@ export default function MyStartup() {
           <CardActionArea>
             <CardContent>
               <Typography gutterBottom variant="h5" component="h2">
+                <img
+                  src={BookIcon}
+                  alt="Factory Icon"
+                  className={classes.icons}
+                />
                 {"The Venture Forum"}
               </Typography>
               <CardMedia
@@ -131,6 +148,11 @@ export default function MyStartup() {
           <CardActionArea>
             <CardContent>
               <Typography gutterBottom variant="h5" component="h2">
+                <img
+                  src={BookIcon}
+                  alt="Factory Icon"
+                  className={classes.icons}
+                />
                 {"Better Business Bureau® of Worcester, MA"}
               </Typography>
               <CardMedia
@@ -163,6 +185,11 @@ export default function MyStartup() {
           <CardActionArea>
             <CardContent>
               <Typography gutterBottom variant="h5" component="h2">
+                <img
+                  src={BookIcon}
+                  alt="Factory Icon"
+                  className={classes.icons}
+                />
                 {"Worcester Regional Chamber of Commerce"}
               </Typography>
               <CardMedia
@@ -192,6 +219,11 @@ export default function MyStartup() {
           <CardActionArea>
             <CardContent>
               <Typography gutterBottom variant="h5" component="h2">
+                <img
+                  src={BookIcon}
+                  alt="Factory Icon"
+                  className={classes.icons}
+                />
                 {"StartUp Worcester"}
               </Typography>
               <CardMedia

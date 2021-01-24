@@ -72,7 +72,7 @@ export default function Login() {
   useEffect(() => {
     if (user.isLoggedIn) {
       console.log(user);
-      setredirect('/My-Startup')
+      setredirect('/my-startup')
     }
   }, [user])
 
@@ -100,7 +100,7 @@ export default function Login() {
         <Button 
           className={classes.button}
           component={Link}
-          to='/Startups'
+          to='/startups'
           variant="outlined"
           color="primary"
         >
@@ -113,7 +113,7 @@ export default function Login() {
         <Button 
           className={classes.button}
           component={Link}
-          to='/Resources'
+          to='/resources'
           variant="outlined"
           color="primary"
         >

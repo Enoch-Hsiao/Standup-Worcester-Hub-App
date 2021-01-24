@@ -2,9 +2,8 @@ import React, { useContext, useState, useEffect } from 'react';
 import { UserContext } from '../providers/UserProvider';
 import { makeStyles } from '@material-ui/core/styles';
 import {
-  Box,
-  FormControl,
-  NativeSelect,
+  AppBar,
+  Toolbar,
   Card,
   CardActionArea,
   CardActions,
@@ -18,17 +17,11 @@ import {
   DialogContent,
   DialogActions,
   IconButton,
-  Avatar,
-  TextField,
 } from '@material-ui/core';
-import { db } from '../services/firebase';
 import CloseIcon from '@material-ui/icons/Close';
 import MuiDialogTitle from '@material-ui/core/DialogTitle';
-import NavBar from '../components/NavBar';
-import NavBarNotLoggedIn from '../components/NavBarNotLoggedIn';
 import get from '../universalHTTPRequests/get';
 import getYoutubeID from '../functions/getYoutubeID';
-import LoadingSpinner from '../components/LoadingSpinnerNoBackground';
 import LinkedInLogo from '../Images/LinkedInLogo.png';
 import WebsiteLogo from '../Images/WebsiteLogo.png';
 import LocationIcon from '../Images/LocationIcon.png';
@@ -45,13 +38,10 @@ import CustomerIcon from '../Images/CustomerIcon.png';
 import PrototypeIcon from '../Images/PrototypeIcon.png';
 import StartUpIcon from '../Images/StartUpIcon.png';
 import AdditionalInformationIcon from '../Images/AdditionalInformationIcon.png';
-import SearchBar from "material-ui-search-bar";
 import createDOMPurify from 'dompurify';
 import { JSDOM } from 'jsdom';
 import { htmlToText } from 'html-to-text';
-import SuccessBanner from '../components/SuccessBanner';
-import ErrorBanner from '../components/ErrorBanner';
-import CommentsIcon from '../Images/Comments.png';
+import PageviewIcon from '@material-ui/icons/Pageview';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -75,12 +65,17 @@ const useStyles = makeStyles((theme) => ({
     marginTop: "25px",
   },
   container: {
+    marginTop: "55px",
     height: '100%',
     width: '100%',
     minHeight: '100vh',
     display: 'flex',
     alignItems: 'center',
     flexDirection: 'column',
+  },
+  title: {
+    marginLeft: theme.spacing(2),
+    flex: 1,
   },
   searchBarContainer: {
     marginTop: '10px',
@@ -150,12 +145,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function MyStartup() {
+export default function ViewStartUpInfo({open, setOpen}) {
   const classes = useStyles();
   const user = useContext(UserContext);
   const window = (new JSDOM('')).window;
   const DOMPurify = createDOMPurify(window);
 
+  const [startupCard, setStartupCard] = useState(null);
+  // eslint-disable-next-line
   const[startUpData, setStartUpData] = useState({
     data: null,
     loading: true,
@@ -175,41 +172,17 @@ export default function MyStartup() {
             </iframe>
           </Container>;
   }
-  const [originalStartupCards, setOriginalStartupCards] = useState([]);
-  const [startupCards, setStartupCards] = useState([]);
   const [openDialog, setOpenDialog] = useState(false);
-  const [currentCardData, setCurrentCardData] = useState({});
 
   const openMoreInfoDialog = (data) => {
     setOpenDialog(true);
-    setCurrentCardData(data);
   }
   const closeMoreInfoDialog = () => {
     setOpenDialog(false);
   }
 
-  //Search bar
-  const [filterString, setFilterString] = useState("");
-  const [filterType, setFilterType] = useState("Name");
-
-  const handleDropdownChange = (event) => {
-    setFilterType(event.target.value);
-  };
-
-  const filterStartUps = (string) => {
-    setFilterString(string);
-    if(filterType === "Name") {
-      setStartupCards(setCards(originalStartupCards.filter(obj => (obj[1].companyName.toLowerCase()).includes(string.toLowerCase()))));
-    } else if (filterType === "Industry") {
-      setStartupCards(setCards(originalStartupCards.filter(obj => (obj[1].companyIndustry.toLowerCase()).includes(string.toLowerCase()))));
-    }
-  }
-
-  const setCards = (array) => {
-    return array.map(startupObj => {
-      const startupData = startupObj[1];
-      if(startupData.public) {
-        return <Card key={startupObj[0]} className={classes.root} onClick={() => openMoreInfoDialog({...startupData, id: startupObj[0]})}>
+  const setCard = (startupData) => {
+    return <Card className={classes.root} onClick={() => openMoreInfoDialog(startupData)}>
         <CardActionArea>
           <CardContent>
             <Typography gutterBottom variant="h4" component="h2" noWrap>
@@ -269,62 +242,46 @@ export default function MyStartup() {
           null}
         </CardActions>
       </Card>
-    } else {
-      return null;
-    }});
-  }
+    } 
+
+  const [values, setValues] = useState({
+    public: false,
+    companyName: "",
+    companyIndustry: "",
+    companyDescription: "",
+    companyYoutube: "",
+    companyLinkedIn: "",
+    companyWebsite:"",
+    companyLocation:"",
+    companyService: "",
+    companyBusinessModel: "",
+    companySalesAndMarketing: "",
+    companyTeamMembers: "",
+    companyTargetCustomer: "",
+    companyFinances: "",
+    companyPrototype: "",
+    companyStartUpWorcester: "",
+    companyAdditionalInformation: "",
+  });
 
   //Get StartUp Data
   let getData = () => {
     function onSuccess(response) {
       if(response.val()) {
-        const cardArray = Object.entries(response.val());
-        setOriginalStartupCards(cardArray);
-        setStartupCards(setCards(cardArray));
+        setStartupCard(setCard(response.val()));
+        setValues(response.val())
       }
     }
-    get(setStartUpData, 'startups/' , null, onSuccess, true);
+    get(setStartUpData, 'startups/' + user.startupID , null, onSuccess, true);
   }
 
   useEffect(getData, []);
-
-  
-  const [successBannerFade, setSuccessBannerFade] = useState(false);
-  // eslint-disable-next-line
-  const [successBannerMessage, setSuccessBannerMessage] = useState("");
-  const [errorBannerFade, setErrorBannerFade] = useState(false);
-  // eslint-disable-next-line
-  const [errorBannerMessage, setErrorBannerMessage] = useState("");
-
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-        setSuccessBannerFade(false);
-    }, 1000);
-  
-    return () => clearTimeout(timeout);
-  }, [successBannerFade]);
-  
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-        setErrorBannerFade(false);
-    }, 1000);
-    return () => clearTimeout(timeout);
-  }, [errorBannerFade]);
-
-  if(startUpData.loading) {
-    return (
-      <div>
-        {user.isLoggedIn ? <NavBar /> : <NavBarNotLoggedIn />}
-        <LoadingSpinner />
-      </div>
-    );
-  }
 
   function DialogTitle(props) {
     const classes = useStyles();
     const { onClose, title } = props;
     return (
-        <MuiDialogTitle disableTypography className={classes.dialogTitleRoot}>
+      <MuiDialogTitle disableTypography className={classes.dialogTitleRoot}>
             <img
               src={FactoryIcon}
               alt="Factory Icon"
@@ -340,13 +297,12 @@ export default function MyStartup() {
                   <CloseIcon />
               </IconButton>
           ) : null}
-        </MuiDialogTitle>
+      </MuiDialogTitle>
     );
   }
 
   function DialogCard() {
     const { 
-      id,
       companyName, 
       companyIndustry, 
       companyDescription, 
@@ -363,83 +319,7 @@ export default function MyStartup() {
       companyPrototype,
       companyStartUpWorcester,
       companyAdditionalInformation,
-      comments,
-    } = currentCardData;
-
-    const[comment, setComment] = useState("");
-    
-    let commentsList; 
-    if(comments) {
-      commentsList = Object.entries(comments).sort((a,b) => b[1].date - a[1].date);
-    }
-
-    commentsList = commentsList ? commentsList.map(obj => {
-      let commentObj = obj[1];
-      return <div>
-        <Grid container wrap="nowrap" spacing={2}>
-        <Grid item>
-          <Avatar alt="User Profile pic" src={commentObj.userProfile} />
-        </Grid>
-        <Grid justifyContent="left" item xs zeroMinWidth>
-          <h4 style={{ margin: 0, textAlign: "left" }}>{commentObj.name}</h4>
-          <p style={{ textAlign: "left" }}>
-            {commentObj.comment}
-          </p>
-          <p style={{ textAlign: "left", color: "gray" }}>
-          {new Date(commentObj.date).toLocaleString()}
-          </p>
-        </Grid>
-      </Grid>
-      <Divider variant="fullWidth" style={{ margin: "30px 0" }} />
-    </div>
-    }) : null;
-
-    const sendComment = () => {
-      db.ref('startups/' + id + '/comments').push({
-        name: user.displayName,
-        userProfile: user.photoURL,
-        date: Date.now(),
-        comment,
-      }).then(()=> {
-        let newComments
-        if(!comments) {
-          newComments = {[Math.random(99999999)]: {
-            name: user.displayName,
-            userProfile: user.photoURL,
-            date: Date.now(),
-            comment,
-          }};
-        } else {
-          newComments = {...comments, [Math.floor(Math.random() * Math.floor(999999999))]: {
-          name: user.displayName,
-          userProfile: user.photoURL,
-          date: Date.now(),
-          comment,
-          }};
-        }
-        let newOriginalStartupCards = originalStartupCards.map(obj => {
-          if(obj[0] === id) {
-            console.log(newComments);
-            return [
-              obj[0],
-              {
-                ...obj[1],
-                comments: newComments,
-              }
-            ]
-          } else {
-            return obj;
-          }
-        })
-        setOriginalStartupCards(newOriginalStartupCards);
-        setCurrentCardData({
-          ...currentCardData,
-          comments: newComments,
-        })
-      }).catch(() => {
-
-      });
-    }
+    } = values;
 
     return (
       <Dialog
@@ -643,51 +523,6 @@ export default function MyStartup() {
           </DialogContent>
         : null}
 
-        <DialogContent dividers>
-          <Typography variant="h5">
-            <img
-              src={CommentsIcon}
-              alt="Comments Icon"
-              className={classes.sideIcons}
-            />
-            Comments:
-          </Typography>
-            <TextField
-              label="Comment Box."
-              inputProps={{
-                maxLength: 500
-              }}
-              value={comment}
-              helperText={`${comment.length}/${500}`}
-              onChange={(event) => setComment(event.target.value)}
-              margin="normal"
-              variant="outlined"
-              fullWidth={true}
-              multiline
-            />
-            <div style={{marginBottom:'20px'}}>
-              <Button
-                onClick={sendComment}
-                color="primary"
-                variant="outlined"
-                style={{
-                  textTransform: 'unset',
-                  width: '200px',
-                }}
-              >
-                <img
-                  src={UpRightArrow}
-                  alt="Up Right Arrow Icon"
-                  className={classes.smallIcons}
-                />
-                <Typography variant="h6">
-                  Send
-                </Typography>
-              </Button>
-            </div>
-          {commentsList}
-        </DialogContent>
-
         <DialogActions>
           <Button
             onClick={closeMoreInfoDialog}
@@ -701,52 +536,35 @@ export default function MyStartup() {
   }
 
   return (
-    <div className={classes.container}>
+    <Dialog fullScreen open={open} onClose={() => setOpen(false)}>
+      <AppBar className={classes.appBar} position="fixed">
+        <Toolbar>
+          <IconButton edge="start" color="inherit" onClick={() => setOpen(false)} aria-label="close">
+            <CloseIcon />
+          </IconButton>
+          <Typography variant="h6" className={classes.title}>
+            <PageviewIcon style={{position:'relative', bottom: '-5px', right: '5px'}}/>
+            {'View StartUp Card'}
+          </Typography>
+        </Toolbar>
+      </AppBar>
+      <div className={classes.container}>
 
-      {user.isLoggedIn ? <NavBar /> : <NavBarNotLoggedIn />}
+        <DialogCard />
 
-      <SuccessBanner fade={successBannerFade} successMessage={successBannerMessage} />
-      <ErrorBanner fade={errorBannerFade} errorMessage={errorBannerMessage} />
+        <Grid
+          container
+          alignItems="center"
+          alignContent="center"
+          direction="row"
+          justify="center"
+          spacing={3}
+          className={classes.grid}
+        >
+          {startupCard}
+        </Grid>
 
-      <DialogCard />
-
-      {/* Dropdown and SearchBar */}
-      <Box 
-        display="flex"
-        className={classes.searchBarContainer}
-      >
-        <FormControl className={classes.formControl}>
-          <NativeSelect
-            labelId="dropdownEquationsLabel"
-            id="dropdownEquations"
-            value={filterType}
-            onChange={handleDropdownChange}
-            style={{ height: '100%' }}
-          >
-            <option value={"Name"}>Name</option>
-            <option value={"Industry"}>Industry</option>
-          </NativeSelect>
-        </FormControl>
-        <SearchBar
-          value={filterString}
-          onChange={(newValue) => filterStartUps(newValue)}
-          onRequestSearch={() => filterStartUps(filterString)}
-          style={{ height: '50px', minWidth: '300px' }}
-        />
-      </Box>
-
-      <Grid
-        container
-        alignItems="center"
-        alignContent="center"
-        direction="row"
-        justify="center"
-        spacing={3}
-        className={classes.grid}
-      >
-        {startupCards}
-      </Grid>
-
-    </div>
+      </div>
+    </Dialog>
   );
 }
