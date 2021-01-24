@@ -6,6 +6,10 @@ Through the web application StartUp Worcester Hub, you can display your startup 
 
 ## Video demo https://www.youtube.com/watch?v=uuWmU78ws7Q&feature=youtu.be
 
+<img src="https://i.imgur.com/b6vsXbs.png" width="100%" border="0" />
+<img src="https://i.imgur.com/sspxwps.png" width="100%" border="0" />
+<img src="https://i.imgur.com/x8dniip.png" width="100%" border="0" />
+
 ## Inspiration
 
 From the HACK@WPI Project Brainstorm document, I felt I could make an impact in providing a central hub of information for startup and entrepreneurship resources available in the city directly to students and the rest of the community. In combination with that, I could also make a social media app that displays and supports local startups and expose events and competitions located in Worcester for startups and businesses to participate and enter in. Therefore, I felt that this idea would fit well with both the Community and WPI Hack, in that this idea can help attract startups to the entrepreneuring events, competitions, and resources in Worcester and support and encourage local young students to explore and expose themselves to the world of business and entrepreneurship. 
