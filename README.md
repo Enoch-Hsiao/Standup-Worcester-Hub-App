@@ -1,6 +1,6 @@
 # Standup Worcester Hub - Hack@WPI 2021 Community Hack Winner - 1st Prize
 
-## [DevPost Winning Submission](https://devpost.com/Enoch-Hsiao?ref_content=user-portfolio&ref_feature=portfolio&ref_medium=global-nav)
+## [DevPost Winning Submission](https://devpost.com/software/startup-worcester-hub)
 
 Through the web application StartUp Worcester Hub, you can display your startup to the Worcester community, support local startups, and explore entrepreneurship resources available in the city.
 
